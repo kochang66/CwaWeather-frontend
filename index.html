@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>阿強全台氣象台</title> 
+    <title>阿強全台氣象站</title> 
     <link rel="icon" type="image/png" href="./icon-v2.png">
     <link rel="apple-touch-icon" href="./icon-v2.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./icon-v2.png">
@@ -133,10 +133,10 @@
             transform: translateY(-50%);
             width: 0;
             height: 0;
-            border-left: 8px solid transparent; /* 【修正】尺寸縮小回 8px */
-            border-right: 8px solid transparent; /* 【修正】尺寸縮小回 8px */
-            border-top: 8px solid #FFFFFF; /* 【修正】使用純白色 */
-            filter: none; /* 【修正】移除光暈，確保清晰度 */
+            border-left: 8px solid transparent; 
+            border-right: 8px solid transparent; 
+            border-top: 8px solid #FFFFFF; /* 最終使用純白色 */
+            filter: none; /* 移除光暈 */
             pointer-events: none; 
             transition: transform 0.3s ease;
         }
@@ -737,14 +737,15 @@
         function handleInitialCityFallback() {
             const citySelector = document.getElementById('citySelector');
             const urlParams = new URLSearchParams(window.location.search);
-            const initialCity = urlParams.get('city') || urlParams.get('currentCity') || 'kaohsiung';
+            // 【修正】將預設城市改為桃園市
+            const initialCity = urlParams.get('city') || urlParams.get('currentCity') || 'taoyuan';
             
             if (CITIES.hasOwnProperty(initialCity)) {
                 currentCitySlug = initialCity;
                 citySelector.value = initialCity;
             } else {
-                currentCitySlug = 'kaohsiung';
-                citySelector.value = 'kaohsiung';
+                currentCitySlug = 'taoyuan';
+                citySelector.value = 'taoyuan';
             }
         }
 
