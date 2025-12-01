@@ -62,7 +62,7 @@
 
 | 項目 | 網址 |
 | :--- | :--- |
-| **前端 GitHub Repo** | `https://github.com/kochang66/CwaWeather-frontend` |
+| **前端 GitHub Repo** | https://github.com/kochang66/CwaWeather-frontend |
 | **前端 GitHub Pages** | `https://kochang66.github.io/CwaWeather-frontend/` |
 | **後端 GitHub Repo** | `https://github.com/kochang66/CwaWeather-backend` |
 | **後端 Zeabur API 網址** | `https://archang-weather.zeabur.app/` |
