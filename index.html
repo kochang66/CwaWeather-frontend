@@ -148,7 +148,7 @@
 
         /* 右側日期：加粗、圓角和外框 */
         .update-pill {
-            font-size: 0.8rem;
+            font-size: 1.1rem; /* 統一為 1.1rem */
             color: white;
             background: var(--ac-blue);
             padding: 5px 15px; 
@@ -159,10 +159,12 @@
             transition: background 0.3s;
         }
 
+        /* 【修正點 1】讓容器內的內容預設水平居中 */
         .container {
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
+            text-align: center; 
         }
 
         /* === 核心：今日焦點卡片 === */
@@ -187,6 +189,7 @@
             color: white;
             padding: 5px 20px;
             border-radius: 20px;
+            font-size: 1.2rem; /* 【修正】統一大小到 1.2rem (和稍後預報一樣大) */
             font-weight: 600; /* 取消粗體 */
             border: 3px solid white;
             box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
@@ -258,28 +261,30 @@
 
         /* === 稍後預報：橫向滑動區 === */
         .section-title {
-            /* 【新增外框】 */
-            font-size: 1.2rem;
+            /* 【修正】使用父層的 text-align: center 居中 */
+            font-size: 1.2rem; /* 保持 1.2rem */
             color: white;
             background: var(--ac-blue);
             padding: 5px 15px; 
             border-radius: 20px; 
             border: 2px solid white; /* 白色外框 */
             box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1); /* 陰影 */
-            margin-bottom: 15px;
-            margin-left: 10px;
+            margin: 0 auto 15px auto; /* 水平居中，保留底部間距 */
             font-weight: 600; /* 取消粗體 */
             text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
             display: inline-block; 
         }
 
         .scroll-container {
+            /* 【修正點 2】居中並允許滑動 */
             display: flex;
+            justify-content: center; /* 讓內容在不溢出時居中 */
             overflow-x: auto;
             gap: 15px;
-            padding-bottom: 10px;
+            padding: 0 20px 10px 20px; /* 添加左右內邊距 */
             scrollbar-width: none;
             -ms-overflow-style: none;
+            /* 移除 text-align: left, 依賴 flex 屬性 */
         }
 
         .scroll-container::-webkit-scrollbar {
@@ -291,19 +296,19 @@
             background: rgba(255, 255, 255, 0.85);
             border-radius: 25px;
             padding: 20px 15px;
-            text-align: center;
+            text-align: center; /* 保留卡片內容居中 */
             border: 3px solid white;
             flex-shrink: 0;
             transition: background 0.3s;
         }
 
         .mini-time {
-            /* 【新增外框】 */
+            /* 【修正點 3】文字大小縮小為 0.9rem，並調整 padding */
             background: var(--ac-blue); 
             color: white;
-            padding: 5px 10px; 
+            padding: 4px 8px; /* 調整 padding 讓方塊不至於太大 */
             border-radius: 20px; /* 統一圓角 */
-            font-size: 0.8rem;
+            font-size: 0.9rem; /* 縮小尺寸 */
             font-weight: 600; /* 取消粗體 */
             border: 2px solid white; /* 白色外框 */
             box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1); /* 輕微陰影 */
@@ -528,6 +533,14 @@
             return nearestCity;
         }
 
+        // 輔助函式：修正溫度符號 (將 ° 轉換為 ℃，並確保只加一次)
+        const formatTemp = (tempString) => {
+            if (typeof tempString !== 'string') tempString = String(tempString);
+            // 移除後端可能已經添加的 ° 或 °C 符號
+            let numericPart = tempString.replace(/°C|°/g, '').trim();
+            // 返回新的 ℃ 符號
+            return numericPart + '℃'; 
+        };
 
         // 功能 3: 可愛圖示與微動畫 (增強版)
         function getWeatherIcon(weather) {
@@ -606,7 +619,7 @@
                             <div class="hero-period">${period}</div>
                             <div class="hero-temp-container">
                                 <div class="hero-icon" style="animation: ${currentIcon.animation};">${currentIcon.icon}</div>
-                                <div class="hero-temp">${avgTemp}°</div>
+                                <div class="hero-temp">${formatTemp(String(avgTemp))}</div>
                             </div>
                             <div class="hero-desc">${current.weather}</div>
                             
@@ -619,7 +632,7 @@
                                 <div class="advice-item">
                                     <div class="advice-icon">${advice.clothIcon}</div>
                                     <div class="advice-text">${advice.clothText}</div>
-                                    <div style="font-size:0.7rem; color:var(--ac-dark)">最高溫 ${current.maxTemp}°</div>
+                                    <div style="font-size:0.7rem; color:var(--ac-dark)">最高溫 ${formatTemp(current.maxTemp)}</div>
                                 </div>
                             </div>
                         </div>
@@ -645,7 +658,7 @@
                                 <div class="mini-card">
                                     <div class="mini-time">${p}</div>
                                     <div class="mini-icon" style="animation: ${miniIcon.animation};">${miniIcon.icon}</div>
-                                    <div class="mini-temp">${f.minTemp}° - ${f.maxTemp}°</div>
+                                    <div class="mini-temp">${formatTemp(f.minTemp)} - ${formatTemp(f.maxTemp)}</div>
                                     <div style="font-size:0.8rem; color:#888; margin-top:5px;">💧${f.rain}</div>
                                 </div>
                             `;
