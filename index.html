@@ -148,7 +148,7 @@
 
         /* 右側日期：加粗、圓角和外框 */
         .update-pill {
-            font-size: 1.1rem; /* 統一為 1.1rem */
+            font-size: 0.9rem; /* 【修正】縮小尺寸 */
             color: white;
             background: var(--ac-blue);
             padding: 5px 15px; 
@@ -276,7 +276,7 @@
         }
 
         .scroll-container {
-            /* 【修正點 2】居中並允許滑動 */
+            /* 【修正點 2】覆蓋父層的 text-align: center，讓內容居中並允許滑動 */
             display: flex;
             justify-content: center; /* 讓內容在不溢出時居中 */
             overflow-x: auto;
@@ -284,7 +284,7 @@
             padding: 0 20px 10px 20px; /* 添加左右內邊距 */
             scrollbar-width: none;
             -ms-overflow-style: none;
-            /* 移除 text-align: left, 依賴 flex 屬性 */
+            text-align: left; /* 保留以防萬一 */
         }
 
         .scroll-container::-webkit-scrollbar {
@@ -533,6 +533,7 @@
             return nearestCity;
         }
 
+
         // 輔助函式：修正溫度符號 (將 ° 轉換為 ℃，並確保只加一次)
         const formatTemp = (tempString) => {
             if (typeof tempString !== 'string') tempString = String(tempString);
@@ -541,7 +542,7 @@
             // 返回新的 ℃ 符號
             return numericPart + '℃'; 
         };
-
+        
         // 功能 3: 可愛圖示與微動畫 (增強版)
         function getWeatherIcon(weather) {
             let icon = "🌤️";
@@ -627,12 +628,12 @@
                                 <div class="advice-item">
                                     <div class="advice-icon">${advice.rainIcon}</div>
                                     <div class="advice-text">${advice.rainText}</div>
-                                    <div style="font-size:0.7rem; color:var(--ac-dark)">降雨率 ${current.rain}</div>
+                                    <div style="font-size:0.9rem; color:var(--ac-dark)">降雨率 ${current.rain}</div>
                                 </div>
                                 <div class="advice-item">
                                     <div class="advice-icon">${advice.clothIcon}</div>
                                     <div class="advice-text">${advice.clothText}</div>
-                                    <div style="font-size:0.7rem; color:var(--ac-dark)">最高溫 ${formatTemp(current.maxTemp)}</div>
+                                    <div style="font-size:0.9rem; color:var(--ac-dark)">最高溫 ${formatTemp(current.maxTemp)}</div>
                                 </div>
                             </div>
                         </div>
@@ -659,7 +660,7 @@
                                     <div class="mini-time">${p}</div>
                                     <div class="mini-icon" style="animation: ${miniIcon.animation};">${miniIcon.icon}</div>
                                     <div class="mini-temp">${formatTemp(f.minTemp)} - ${formatTemp(f.maxTemp)}</div>
-                                    <div style="font-size:0.8rem; color:#888; margin-top:5px;">💧${f.rain}</div>
+                                    <div style="font-size:1.0rem; color:#888; margin-top:5px;">💧${f.rain}</div>
                                 </div>
                             `;
             });
