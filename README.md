@@ -25,7 +25,7 @@
    * **核心技術：** HTML5, CSS3, JavaScript (ES6+)
    * **樣式與字體：** CSS Variables (實現動態配色), Klee One (個性化字型)
    * **特色功能：** Geolocation API (自動定位偵測)
-   * **部署：**
+   * **部署：** GitHub Pages
 2. **後端 (Backend):**
    * **核心技術：** Node.js, Express (API 框架)
    * **數據來源：** Axios (HTTP Client), CWA 交通部中央氣象署開放資料平臺
